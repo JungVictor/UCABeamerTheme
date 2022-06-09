@@ -1,6 +1,7 @@
 import os
 import sys
 import shutil
+import subprocess
 
 OUTPUT_FOLDER_CLEANUP = "output_cleanup/"
 
@@ -64,8 +65,8 @@ if __name__ == "__main__":
 
     try:
         # Call PDFLaTeX to generate the .pdf
-        os.system('cmd /c "pdflatex.exe -draftmode -interaction=nonstopmode '+texfile+'"')
-        os.system('cmd /c "pdflatex.exe -synctex=1 -interaction=nonstopmode '+texfile+'"')
+        subprocess.call('pdflatex.exe -draftmode -interaction=nonstopmode '+texfile, shell=True)
+        subprocess.call('pdflatex.exe -synctex=1 -interaction=nonstopmode '+texfile, shell=True)
     except:
         print("Error while generating the files !")
 
