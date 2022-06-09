@@ -1,0 +1,22 @@
+\ProvidesFile{t1apexnew.fd}
+\DeclareFontFamily{T1}{apexnew}{}
+
+% MEDIUM 
+\DeclareFontShape{T1}{apexnew}{m}{n}{ <-> apexnew-medium}{}
+
+% MEDIUM ITALIC
+\DeclareFontShape{T1}{apexnew}{m}{it}{ <-> apexnew-mediumitalic}{}
+
+% BOLD 
+\DeclareFontShape{T1}{apexnew}{b}{n}{ <-> apexnew-bold}{}
+\DeclareFontShape{T1}{apexnew}{bx}{n}{ <-> apexnew-bold}{}
+
+% BOLD ITALIC
+\DeclareFontShape{T1}{apexnew}{b}{it}{ <-> apexnew-bolditalic}{}
+\DeclareFontShape{T1}{apexnew}{bx}{it}{ <-> apexnew-bolditalic}{}
+
+% MAPLINES
+\pdfmapline{+apexnew-medium\space <apexnew-medium.ttf\space <T1-WGL4.enc}
+\pdfmapline{+apexnew-mediumitalic\space <apexnew-mediumitalic.ttf\space <T1-WGL4.enc}
+\pdfmapline{+apexnew-bold\space <apexnew-bold.ttf\space <T1-WGL4.enc}
+\pdfmapline{+apexnew-bolditalic\space <apexnew-bolditalic.ttf\space <T1-WGL4.enc}

@@ -1,0 +1,336 @@
+\pgfdeclareverticalshading[lower.bg,upper.bg]{bmb@transition}{200cm}{%
+  color(0pt)=(lower.bg); color(2pt)=(lower.bg); color(4pt)=(lower.bg)}
+
+\setbeamersize{text margin left=2em,text margin right=2em} 
+
+% Top/Bottom Frame Margin
+\define@key{beamerframe}{c}[true]{
+  \beamer@frametopskip=0pt plus 1fill\relax
+  \beamer@framebottomskip=0pt plus 1.5fill\relax
+}
+
+% Options
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{enumerate items}[default]
+
+% ==================
+% TABLE OF CONTENTS
+% ==================
+\tikzset{section number/.style={
+    rectangle,  
+    fill=SecondaryColor,  
+    minimum width=1em,
+    minimum height=1.4em,
+    text=ThemeWhite,
+    inner sep=1.4pt,
+  },
+  section/.style={
+    draw=none,
+    rectangle,
+    minimum height=1em,
+    minimum width=0.8\textwidth,
+    text width=0.8\textwidth,
+    text=MainColor,
+    align=left
+  },
+  subsection number/.style={
+    %circle, minimum size=0.4em,
+    rectangle, minimum height=0.4em, minimum width=0.4em,
+    fill=ThemeBlack!20!ThemeWhite,
+    inner sep=0pt,
+  },
+  subsection/.style={
+    draw=none,
+    rectangle,
+    minimum height=1em,
+    minimum width=0.8\textwidth,
+    text width=0.8\textwidth,
+    text=ThemeBlack!60!ThemeWhite,
+    align=left
+  }
+}
+
+% Section
+\setbeamertemplate{section in toc}{
+    \hspace*{0.5em}
+    \tikz[baseline=-0.5ex] 
+        \node[section number]{\textbf{\small\inserttocsectionnumber}};
+    \tikz[baseline=-0.5ex]
+        \node[section]{\usebeamerfont*{toc title} \inserttocsection};\\[-0.8em]
+    \hspace*{1.5em}{
+        \color{ThemeBlack!10!ThemeWhite} \rule{0.6\paperwidth}{0.2pt} \\
+        \nointerlineskip
+    }
+}
+
+% Subsection
+\setbeamertemplate{subsection in toc}{
+  \hspace*{1.4em}
+  \tikz[baseline=-0.5ex] \node[subsection number]{};
+  \hspace*{1.4em}
+  \tikz[baseline=-0.5ex] \node[subsection]{
+    \usebeamerfont*{toc subtitle} \inserttocsubsection
+  };
+  \\[-0.1cm]
+}
+
+% ==================
+% FOOTLINE
+% ==================
+
+
+
+
+\setbeamertemplate{footline}{
+    \ifx\beamer@theme@footer\beamer@theme@opaque
+        \begin{beamercolorbox}[wd=\paperwidth, leftskip=1ex, rightskip=1ex, colsep*=1ex, vmode]{footer}
+            \FooterLogo{0.6cm}
+        \end{beamercolorbox}
+    \fi
+    \ifx\beamer@theme@footer\beamer@theme@transparent
+        \centering
+        \begin{tikzpicture}
+            \node[opacity=0.2, text width=\paperwidth-2ex]{
+                \FooterLogo{0.6cm}
+            };
+        \end{tikzpicture}
+    \fi
+    \ifx\beamer@theme@progressbar\beamer@theme@bottom
+        \par
+        \begin{tikzpicture}
+           \progressbar
+        \end{tikzpicture}
+    \fi
+}
+
+% ==================
+% FRAME TITLE (TOP)
+% ==================
+
+% -- Section and subsection
+\def\notoprightsection{
+    \framenumberpos=0.7cm
+    \def\sectiontop{}
+}
+
+\def\sectiontop{
+    \ifx \insertsectionhead \@empty \else {
+        \node[anchor=east] at (\paperwidth, 0.95){
+            \textcolor{FrameSubtitle}{\footnotesize \insertsectionhead}
+            \ifx \insertsubsectionhead \@empty \else \textcolor{FrameTitle}{\footnotesize: \tiny\insertsubsectionhead}\fi
+        };
+    }\fi
+}
+\newdimen\framenumberpos
+\framenumberpos=0.55cm
+
+\ifx\beamer@theme@toprightsection\beamer@theme@false \notoprightsection \fi
+
+
+% -- Progress bar 
+\newdimen\progressbar@width
+\newdimen\progressbar@height
+\progressbar@height=0.1cm
+
+\def\progressbar{
+    % Compute the size of the progress bar
+    \progressbar@width = \paperwidth
+    \multiply \progressbar@width by \insertframenumber
+    \divide \progressbar@width by \inserttotalframenumber
+
+    % Draw the progress bar
+    \begin{tikzpicture}
+        \fill[color=ProgressBarBackground] (\progressbar@width, \progressbar@height) rectangle(\paperwidth, 0);
+        \fill[color=ProgressBarActive] (0, \progressbar@height) rectangle(\progressbar@width, 0);
+    \end{tikzpicture}
+}
+
+\def\slidenumberingnumber{
+     \textcolor{FrameSubtitle}{\Large \insertframenumber}
+}
+\def\slidenumberingfraction{
+      \textcolor{FrameSubtitle}{\Large \insertframenumber} \textcolor{FrameTitle}{\footnotesize / \inserttotalframenumber}
+}
+
+\def\slidenumbering{}
+\ifx\beamer@theme@numbering\beamer@theme@fractionnumbering \def\slidenumbering{\slidenumberingfraction} \fi
+\ifx\beamer@theme@numbering\beamer@theme@numbernumbering \def\slidenumbering{\slidenumberingnumber} \fi
+
+\def\titleframebackground{
+    \fill[left color=TitleFrameLeft, right color=TitleFrameRight] (0,0.1) rectangle(\paperwidth,1.4);
+}
+
+% -- Frame Title
+\setbeamertemplate{frametitle}{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.2cm]{frametitle}
+  \begin{tikzpicture}
+    % Background
+    \titleframebackground
+    \ifx \insertframesubtitle \@empty {
+        % Title
+        \node[anchor=mid west, FrameTitle, font=\Large] at (0.2,0.65){\MakeUppercase\insertframetitle};
+    } \else {
+        % Title + subtitle
+        \node[anchor=mid west, FrameSubtitle, font=\small] at (0.2, 0.5){$\cdots$ \insertframesubtitle};
+        \node[anchor=mid west, FrameTitle, font=\Large] at (0.2, 0.8){\MakeUppercase\insertframetitle};
+    } \fi
+    
+    % Slide number
+    \node[anchor=mid east] at (\paperwidth, \framenumberpos){\slidenumbering};
+    \sectiontop
+    % Frame border
+    \ifx\beamer@theme@progressbar\beamer@theme@top
+        \progressbar
+    \fi
+    \ifx\beamer@theme@progressbar\beamer@theme@static
+        \fill[color=FrameBorderTop] (0, 0) rectangle(\paperwidth, 0.1);
+    \fi
+  \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+\ifx\beamer@theme@mode\beamer@theme@simple
+    \colorlet{FrameTitle}{MainDarkColor}
+    \colorlet{FrameSubtitle}{MainLightColor}
+    \def\titleframebackground{
+        \fill[color=GeneralBackgroundColor] (0,0.1) rectangle(\paperwidth,1.4);
+    }
+\fi
+
+
+% ==================
+% TITLE PAGE
+% ==================
+
+% Automatic definition with no frame + no frame numbering
+\def\maketitle{
+    \ifbeamer@inframe \titlepage
+    \else \frame[plain,noframenumbering] \titlepage \fi
+}
+
+
+% Title page
+\setbeamertemplate{title page}{
+    
+    % All logos 
+    \TitlePageLogo
+        
+    \vspace{3em}
+    
+    \begingroup
+        % --- Title
+        \begin{beamercolorbox}[sep=8pt]{title}
+        \usebeamerfont{title}\inserttitle\par%
+        \ifx\insertsubtitle\@empty%
+        \else%
+            \vskip0.25em%
+            {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+        \fi%     
+        \end{beamercolorbox}%
+        \vskip0pt
+        % --- Line
+        {\color{SecondaryColor}\hrule}
+        \par
+        % --- Date
+        \begin{beamercolorbox}[sep=8pt,right]{date}
+        \usebeamerfont{date}\insertdate
+        \end{beamercolorbox}\vskip0pt
+        \par
+        % --- Author
+        \begin{beamercolorbox}[sep=8pt,left]{author}
+        \usebeamerfont{author}\insertauthor
+        \end{beamercolorbox}
+        \vskip-1em
+        % --- Institute
+        \begin{beamercolorbox}[sep=8pt,left]{institute}
+        \usebeamerfont{institute}\insertinstitute
+        \end{beamercolorbox}
+        
+        % ------------------------
+        {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+    \endgroup
+    \vfill
+}
+
+% ==================
+% BLOCKS
+% ==================
+\setbeamertemplate{block begin}{\customblock{BlockTitle}{BlockBody}{\insertblocktitle}}
+\setbeamertemplate{block alerted begin}{\customblock{AlertBlockTitle}{AlertBlockBody}{\insertblocktitle}}
+\setbeamertemplate{block example begin}{\customblock{ExampleBlockTitle}{ExampleBlockBody}{\insertblocktitle}}
+
+\setbeamertemplate{block end}{\customblockend}
+\setbeamertemplate{block alerted end}{\customblockend}
+\setbeamertemplate{block example end}{\customblockend}
+
+% --- Custom blocks definition
+\newcommand{\customblock}[3]{
+        \setbeamercolor*{item}{fg=#1}
+        \begin{adjustbox}{trim=0 2.4ex 0 0, rndcorners=0 4pt}
+        \begin{tabular}
+            % Colors
+            {!{\color{#1}{\vrule width 4pt}}>{\columncolor{#2}}m{\dimexpr\textwidth-4ex}}
+            \vspace{0.7ex}
+            \color{#1!50!ThemeBlack}
+            \ifx#3\@empty 
+            \else \usebeamerfont*{block title} #3\vskip 0pt \fi
+            \usebeamerfont*{block text}
+}
+\newcommand{\customblockend}{\end{tabular}\end{adjustbox}}
+
+
+% ==================
+% [STANDOUT] FRAMES
+% ==================
+\providebool{uca@standout}
+\define@key{beamerframe}{standout}[true]{%
+    \booltrue{uca@standout}
+    \begingroup
+        \setbeamertemplate{footline}{}
+        \setkeys{beamerframe}{c}
+        \setkeys{beamerframe}{noframenumbering}
+        \ifx\beamer@theme@footer\beamer@theme@false
+            \beamer@frametopskip=0pt plus 0.1fill\relax
+        \else
+            \beamer@frametopskip=0.8cm plus 0.1fill\relax
+        \fi
+        \beamer@framebottomskip=0pt plus 0.1fill\relax
+        \setbeamercolor{background canvas}{
+            use=standout,
+            bg=standout.bg
+        }
+        \centering
+        \usebeamercolor[fg]{standout}
+        \usebeamerfont{frametitle}
+        \vspace{1ex}
+        \par
+}
+
+\providebool{uca@noframetitle}
+\define@key{beamerframe}{noframetitle}[true]{%
+    \booltrue{uca@noframetitle}
+    \begingroup
+        \setbeamertemplate{frametitle}{}
+        \setbeamertemplate{footline}{}
+        \ifx\beamer@theme@footer\beamer@theme@false
+            \beamer@frametopskip=0pt plus 0.1fill\relax
+        \else
+            \beamer@frametopskip=0.8cm plus 0.1fill\relax
+        \fi
+        \beamer@framebottomskip=0pt plus 0.1fill\relax
+        \setkeys{beamerframe}{noframenumbering}
+        \par
+}
+
+\apptocmd{\beamer@reseteecodes}{
+    \ifbool{uca@standout}{
+        \endgroup
+        \boolfalse{uca@standout}
+    }{
+        \ifbool{uca@noframetitle}{
+            \endgroup
+            \boolfalse{uca@noframetitle}
+        }{}
+    }
+}{}{}

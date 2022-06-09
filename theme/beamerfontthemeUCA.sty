@@ -1,0 +1,46 @@
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FONT FAMILY
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\encodingdefault}{T1}
+%\usepackage[sfdefault, book, scale=0.9]{FiraSans}
+\usepackage[sfdefault, light, scale=0.9]{roboto}
+\renewcommand\mathfamilydefault{\rmdefault}
+
+% Default font for titles
+\def\titlefont{apexnew}
+% Default font for code
+\def\codefont{firamono}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamerfont{structure}{family=\sffamily,series=\mdseries}
+\setbeamerfont{apexnew}{family*={apexnew}, parent=structure}
+\setbeamerfont{code}{family*=\codefont, parent=structure}
+
+\setbeamerfont{title}{size=\huge, family*=\titlefont, series=\bfseries,parent=structure}
+\setbeamerfont{subtitle}{size=\normalsize,parent=title}
+
+\setbeamerfont{footer}{size=\tiny, parent=structure}
+
+\setbeamerfont{date}{size=\scriptsize,series=\mdseries,parent=structure}
+\setbeamerfont{author}{size=\large,series=\mdseries,parent=structure}
+\setbeamerfont{institute}{size=\scriptsize,series=\mdseries,parent=structure}
+
+\setbeamerfont{toc title}{size=\large, family*=\titlefont, series=\bfseries, parent=structure}
+\setbeamerfont{toc subtitle}{parent=structure}
+\setbeamerfont{subsection in toc}{size=\small,series=\mdseries,parent={section in toc}}
+\setbeamerfont{section in toc}{size=\Large, family*=\titlefont, series=\bfseries,parent=structure}
+
+\setbeamerfont{section in head/foot}{size=\tiny,parent=structure}
+
+\setbeamerfont{frametitle}{size=\LARGE, family*=\titlefont, series=\mdseries,parent=structure}
+\setbeamerfont{framesubtitle}{parent=frametitle,size=\Large}
+
+\setbeamerfont{caption}{size=\footnotesize}
+\setbeamerfont{item}{parent=structure,series=\mdseries}
+\setbeamerfont{block title}{size=\normalsize,series=\mdseries, family*=\titlefont, parent={structure,block body}}
+
+\mode<all>

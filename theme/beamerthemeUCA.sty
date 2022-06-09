@@ -1,0 +1,62 @@
+\ProvidesPackage{beamerthemeUCA}
+
+\mode<presentation>
+
+% Settings
+\usepackage{thememacros}
+\usepackage{tikz}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{ifthen}
+\usepackage{colortbl}
+
+\usetheme{Madrid}
+
+% General
+\def\beamer@theme@false{false}
+\def\beamer@theme@true{true}
+\def\beamer@theme@transparent{transparent}
+\def\beamer@theme@opaque{opaque}
+
+% COLOR
+\DeclareOptionBeamer{color}{\def\beamer@theme@color{#1}}
+\ExecuteOptionsBeamer{color=default}
+
+% MODE
+\DeclareOptionBeamer{mode}{\def\beamer@theme@mode{#1}}
+\ExecuteOptionsBeamer{mode=default}
+% --
+\def\beamer@theme@defaultmode{default}
+\def\beamer@theme@simple{simple}
+
+% FRAME NUMBERING
+\DeclareOptionBeamer{numbering}{\def\beamer@theme@numbering{#1}}
+\ExecuteOptionsBeamer{numbering=fraction} % Default fraction numbering
+% --
+\def\beamer@theme@fractionnumbering{fraction}
+\def\beamer@theme@numbernumbering{number}
+
+% FOOTER
+\DeclareOptionBeamer{footer}{\def\beamer@theme@footer{#1}}
+\ExecuteOptionsBeamer{footer=true}
+
+% PROGRESSBAR
+\DeclareOptionBeamer{progressbar}{\def\beamer@theme@progressbar{#1}}
+\ExecuteOptionsBeamer{progressbar=top}
+\def\beamer@theme@top{top}
+\def\beamer@theme@bottom{bottom}
+\def\beamer@theme@static{static}
+
+% TOP RIGHT SECTION 
+\DeclareOptionBeamer{toprightsection}{\def\beamer@theme@toprightsection{#1}}
+\ExecuteOptionsBeamer{toprightsection=true}
+
+\ProcessOptionsBeamer
+
+\setbeamertemplate{itemize items}[circle]
+
+\usefonttheme{UCA}
+\usecolortheme{UCA}
+\useinnertheme{UCA}
+
+\mode<all>

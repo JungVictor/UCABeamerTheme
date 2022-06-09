@@ -1,0 +1,85 @@
+% ==================
+% LOGOS
+% ==================
+\def\WhiteLogoI3S{logos/I3S/i3s-blanc.png}
+\def\WhiteLogoUCA{logos/UCA/large.png}
+\def\WhiteLogoInria{logos/Inria/inr_logo_blanc.png}
+\def\LogoI3S{logos/I3S/i3s-Quadri.png}
+\def\LogoUCA{logos/UCA/big.png}
+\def\LogoInria{logos/Inria/inr_logo_rouge.png}
+\def\Logo3IA{logos/3IA/logo.png}
+
+% ------------------
+% Logo for the title page
+
+\def\TitlePageLogo{
+    \centering
+    \includegraphics[height=3em]{\LogoUCA}
+    \hfill
+    \includegraphics[height=3em]{\LogoI3S}
+    \hfill
+    \includegraphics[height=3em]{\Logo3IA}
+}
+
+% Logo at the bottom of each slide
+\def\FooterLogo#1{
+    \includegraphics[height=#1]{\WhiteLogoUCA}
+    \hfill \includegraphics[height=#1]{\WhiteLogoI3S}
+    %\hfill \includegraphics[height=#1]{\LogoInria}
+}
+
+% ==================
+% TEXT
+% ==================
+
+% Simple new line with vertical space
+\def\nline{\vspace{0.5cm}}
+% Create a small title, with the same font used for the title frame
+\def\SmallTitle#1{{\usebeamerfont{apexnew}\large\bfseries\color{Important} #1}}
+% Display in bold with the same font used for the title frame
+\def\BoldText#1{\usebeamerfont{apexnew}\textbf{#1}}
+% Custom emphasize
+\def\EmphText#1{\textbf{\color{Important}#1}}
+% Display a simple line of code
+\def\InlineCode#1{\textcolor{white}{\colorbox{InlineCodeBackground}{\footnotesize\usebeamerfont{code}#1}}}
+% Display the text as a function call
+\def\call#1{{\usefont{T1}{cmr}{m}{sc}#1}}
+
+
+
+% ==================
+% CUSTOM COLOR BLOCK
+% ==================
+\newenvironment{cblock}[2][DarkGray]{
+    \customblock{#1}{CustomBlockBackground}{#2}
+}{
+    \par\vspace{1ex}\end{tabular}\end{adjustbox}
+}
+
+
+% ==================
+% CODE COLOR
+% ==================
+
+\usepackage{listings}
+\lstdefinestyle{MDDLib}{
+    language=Java,
+    % Syntax color
+    basicstyle   =   \tiny\usebeamerfont{code}\color{darkgray},
+    keywordstyle =   \tiny\color{CodeKeyword},
+    commentstyle =   \color{CodeComment},
+    stringstyle  =   \color{CodeString},
+    numberstyle  =   \tiny\color{gray},
+    % Rules
+    breakatwhitespace = false,         
+    breaklines        = true,
+    keepspaces        = true,
+    numbers           = none,
+    numbersep         = 5pt,                  
+    showspaces        = false,
+    showstringspaces  = false,
+    % Keywords
+    morekeywords={MDD, PMDD, MapOf, PropertySum, Domains}
+}
+
+\lstnewenvironment{MDDCode}[1][]{\lstset{inputencoding=latin1, style=MDDLib,#1}}{}

@@ -1,0 +1,13 @@
+\ProvidesFile{t1firamono.fd}
+\DeclareFontFamily{T1}{firamono}{}
+
+% MEDIUM 
+\DeclareFontShape{T1}{firamono}{m}{n}{ <-> firamono-medium}{}
+
+% BOLD 
+\DeclareFontShape{T1}{firamono}{b}{n}{ <-> firamono-bold}{}
+\DeclareFontShape{T1}{firamono}{bx}{n}{ <-> firamono-bold}{}
+
+% MAPLINES
+\pdfmapline{+firamono-medium\space <firamono-medium.ttf\space <T1-WGL4.enc}
+\pdfmapline{+firamono-bold\space <firamono-bold.ttf\space <T1-WGL4.enc}
