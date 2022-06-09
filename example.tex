@@ -1,0 +1,201 @@
+%---------------------------------
+%   PACKAGES AND THEMES
+%---------------------------------
+
+\documentclass[aspectratio=43]{beamer}
+\usetheme[
+    % --- CUSTOMISATION OPTIONS
+    % Change the color theme
+    % VALUES : default, dark, I3S, UCA, (Sakura, Classical)
+    color=default,
+    % ----------------------
+    % Default : frametitle at top;  simple : no frametitle
+    % VALUES : default, simple
+    mode=default,
+    % ----------------------
+    % Show (opaque / transparent) or hide (false) the footer
+    % VALUES : opaque, transparent, false
+    footer=false,
+    % ----------------------
+    % Show the section (and subsection) at the top right of the slide
+    % VALUES : true, false
+    toprightsection=false,
+    % ----------------------
+    % Change the display mode of the number of slides on the top right
+    % VALUES : fraction, number, none
+    numbering=fraction,
+    % ----------------------
+    % Show a progressbar at top, bottom, or don't show at all
+    % Can be replaced by a static separator bar (static)
+    % VALUES : top, bottom, static, none
+    progressbar=top
+]{UCA}
+
+
+
+%---------------------------------
+%   TITLE PAGE
+%---------------------------------
+
+\title[Example]{UCABeamerTheme}
+\subtitle{Example}
+
+\author[JUNG]{Victor JUNG}
+
+
+\institute[UCA]{Universit\'{e} C\^{o}te d'Azur, CNRS, I3S, France\\%
+  \texttt{victor.jung@univ-cotedazur.fr}}
+\date{\today}
+
+
+%---------------------------------
+%   PRESENTATION SLIDES
+%---------------------------------
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{}
+    \tableofcontents
+\end{frame}
+
+
+% Lists frame
+\section{Lists in Beamer}
+\begin{frame}{Lists in Beamer}
+
+This is an unordered list:
+\begin{itemize}
+    \item Item 1
+    \item Item 2
+    \item Item 3
+\end{itemize}
+
+and this is an ordered list:
+\begin{enumerate}
+    \item Item 1
+    \item Item 2
+    \item Item 3
+\end{enumerate}
+
+\end{frame}
+
+
+% Blocks frame
+\section{Blocks in Beamer}
+\begin{frame}[standout]
+    Standout frame
+\end{frame}
+
+
+\subsection{Classic}
+\begin{frame}{Blocks in Beamer}{Classic}
+    \SmallTitle{Different blocks !}\newline
+
+    \begin{block}{Standard Block}
+        This is a standard block.
+    \end{block}\newline
+
+    \begin{alertblock}{Alert Message}
+        This block presents alert message.
+    \end{alertblock}\newline
+
+    \begin{exampleblock}{An example of typesetting tool}
+        Example: MS Word, \LaTeX{}
+    \end{exampleblock}
+\end{frame} 
+
+%------------------------------------------------
+\subsection{Custom}
+
+\begin{frame}{Blocks in Beamer}{Custom}
+
+    \begin{cblock}[AlertBlockTitle]{Custom Block}
+        This is a custom block
+    \end{cblock}\newline
+
+    \begin{cblock}[BlockTitle]{Custom Block 2}
+        You can use the color you want
+    \end{cblock}\newline
+
+    \begin{cblock}[ExampleBlockTitle]{Code}
+        \textbackslash begin\{cblock\}[color]\{Title\}\\
+            \% ...\\
+        \textbackslash end\{cblock\}
+    \end{cblock}
+
+\end{frame}
+
+
+%------------------------------------------------
+\section{Theme Customisation}
+\subsection{Options}
+
+\begin{frame}{Options (1)}
+
+    \begin{cblock}[violet]{color}
+        Change the color theme\\
+        \textbf{VALUES :} default, dark, I3S, UCA, Sakura, Classical
+    \end{cblock}\nline
+
+    \begin{cblock}[blue]{mode}
+        Default : frametitle at top;  simple : no frametitle\\
+        \textbf{VALUES :} default, simple
+    \end{cblock}\nline
+
+    \begin{cblock}[green]{footer}
+        Show (opaque / transparent) or hide (false) the footer\\
+        \textbf{VALUES :} opaque, transparent, false
+    \end{cblock}
+
+\end{frame}
+
+\begin{frame}{Options (2)}
+
+    \begin{cblock}[yellow]{toprightsection}
+        Show the section (and subsection) at the top right of the slide\\
+        \textbf{VALUES :} true, false
+    \end{cblock}\nline
+
+    \begin{cblock}[orange]{numbering}
+        Change the display mode of the number of slides on the top right\\
+        \textbf{VALUES :} fraction, number, none
+    \end{cblock}\nline
+
+    \begin{cblock}[red]{progressbar}
+        Show a progressbar at top, bottom, or don't show at all\\
+        Can be replaced by a static separator bar (static)\\
+        \textbf{VALUES :} top, bottom, static, none
+    \end{cblock}
+
+\end{frame}
+
+%------------------------------------------------
+\subsection{Logos}
+
+\begin{frame}{Logos}
+    To change the logos for the title page and the footer, you must go to the \InlineCode{./theme/thememacros.sty} file and edit the \textbackslash TitlePageLogo and \textbackslash FooterLogo definitions.\nline 
+
+    \begin{exampleblock}{Already defined logos}
+
+        \includegraphics[height=3em]{\WhiteLogoI3S}
+        \hfill
+        \includegraphics[height=3em]{\LogoI3S}
+        \hfill
+        \includegraphics[height=3em]{\WhiteLogoUCA}
+        \hfill
+        \includegraphics[height=3em]{\LogoUCA}
+        \hfill
+        \includegraphics[height=3em]{\WhiteLogoInria}
+        \hfill
+        \includegraphics[height=3em]{\LogoInria}
+        \hfill
+        \includegraphics[height=3em]{\Logo3IA}
+
+    \end{exampleblock}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

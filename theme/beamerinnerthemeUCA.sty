@@ -272,9 +272,8 @@
             % Colors
             {!{\color{#1}{\vrule width 4pt}}>{\columncolor{#2}}m{\dimexpr\textwidth-4ex}}
             \vspace{0.7ex}
-            \color{#1!50!ThemeBlack}
             \ifx#3\@empty 
-            \else \usebeamerfont*{block title} #3\vskip 0pt \fi
+            \else \usebeamerfont*{block title} {\color{#1!50!ThemeBlack}#3}\vskip 0pt \fi
             \usebeamerfont*{block text}
 }
 \newcommand{\customblockend}{\end{tabular}\end{adjustbox}}
