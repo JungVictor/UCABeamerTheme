@@ -23,7 +23,7 @@
     \colorlet{FrameSubtitle}{MainInvisibleColor}
     \colorlet{FrameTitle}{ThemeWhite}
     \colorlet{CustomBlockBackground}{GeneralBackgroundColor!95!ThemeBlack}
-    \colorlet{InlineCodeBackground}{DarkGray}
+    \colorlet{InlineCodeBackground}{LightGray}
     
     
     % ------------------
@@ -40,9 +40,9 @@
 % ==================
 
 % --- GENERAL
-\definecolor{GeneralBackgroundColor}{RGB}{255,255,255}
-\definecolor{DarkGray}{RGB}{90, 90, 90}
-\definecolor{LightGray}{RGB}{240, 240, 240}
+\definecolor{GeneralBackgroundColor}{RGB}{240,240,240}
+\colorlet{DarkGray}{ThemeWhite!35!ThemeBlack}
+\colorlet{LightGray}{ThemeWhite!80!ThemeBlack}
 
 
 % --- UCA
@@ -230,9 +230,9 @@
 \definecolor{AlertBlockTitle}{rgb}{0.925, 0.345, 0.345}
 \definecolor{ExampleBlockTitle}{rgb}{0.37, 0.7, 0.66}
 
-\colorlet{BlockBody}{BlockTitle!15!ThemeWhite}
-\colorlet{AlertBlockBody}{AlertBlockTitle!15!ThemeWhite}
-\colorlet{ExampleBlockBody}{ExampleBlockTitle!15!ThemeWhite}
+\colorlet{BlockBody}{BlockTitle!15!GeneralBackgroundColor}
+\colorlet{AlertBlockBody}{AlertBlockTitle!15!GeneralBackgroundColor}
+\colorlet{ExampleBlockBody}{ExampleBlockTitle!15!GeneralBackgroundColor}
 
 % ------------------
 
@@ -242,4 +242,6 @@
 \setbeamercolor{block body example}{ bg = ExampleBlockBody }
 \setbeamercolor{block title alerted}{ bg = AlertBlockTitle }
 \setbeamercolor{block body alerted}{ bg = AlertBlockBody }
-\setbeamercolor{footer}{fg = ThemeWhite, bg = TitleFrameLeft}
+\setbeamercolor{footer}{fg = GeneralBackgroundColor, bg = TitleFrameLeft}
+\setbeamercolor{progressbar_bg}{bg = ProgressBarBackground}
+\setbeamercolor{progressbar_active}{bg = ProgressBarActive}

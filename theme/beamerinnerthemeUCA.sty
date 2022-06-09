@@ -131,7 +131,7 @@
 % -- Progress bar 
 \newdimen\progressbar@width
 \newdimen\progressbar@height
-\progressbar@height=0.1cm
+\progressbar@height=1.2pt
 
 \def\progressbar{
     % Compute the size of the progress bar
@@ -163,31 +163,43 @@
 
 % -- Frame Title
 \setbeamertemplate{frametitle}{
-  \begin{beamercolorbox}[wd=\paperwidth,ht=1.2cm]{frametitle}
-  \begin{tikzpicture}
-    % Background
-    \titleframebackground
-    \ifx \insertframesubtitle \@empty {
-        % Title
-        \node[anchor=mid west, FrameTitle, font=\Large] at (0.2,0.65){\MakeUppercase\insertframetitle};
-    } \else {
-        % Title + subtitle
-        \node[anchor=mid west, FrameSubtitle, font=\small] at (0.2, 0.5){$\cdots$ \insertframesubtitle};
-        \node[anchor=mid west, FrameTitle, font=\Large] at (0.2, 0.8){\MakeUppercase\insertframetitle};
-    } \fi
-    
-    % Slide number
-    \node[anchor=mid east] at (\paperwidth, \framenumberpos){\slidenumbering};
-    \sectiontop
+    \vmode
+    \begin{beamercolorbox}[wd=\paperwidth,ht=1.2cm]{frametitle}
+        \begin{tikzpicture}
+            % Background
+            \titleframebackground
+            \ifx \insertframesubtitle \@empty
+                % Title
+                \node[anchor=mid west, FrameTitle, font=\Large] at (0.2,0.65){\MakeUppercase\insertframetitle};
+            \else
+                % Title + subtitle
+                \node[anchor=mid west, FrameSubtitle, font=\small] at (0.2, 0.5){$\cdots$ \insertframesubtitle};
+                \node[anchor=mid west, FrameTitle, font=\Large] at (0.2, 0.8){\MakeUppercase\insertframetitle};
+            \fi
+        
+            % Slide number
+            \node[anchor=mid east] at (\paperwidth, \framenumberpos){\slidenumbering};
+            \sectiontop
+        \end{tikzpicture}
+    \end{beamercolorbox}
     % Frame border
     \ifx\beamer@theme@progressbar\beamer@theme@top
-        \progressbar
+        \vspace{\progressbar@height}
+        \vspace{-0.78cm}
+        \begin{beamercolorbox}[wd=\paperwidth,ht=1pt]{frametitle}
+            \progressbar
+        \end{beamercolorbox}
+    \else
+        \ifx\beamer@theme@progressbar\beamer@theme@static
+            \vspace{\progressbar@height}
+            \vspace{-0.78cm}
+            \begin{beamercolorbox}[wd=\paperwidth,ht=1pt]{frametitle}
+                \begin{tikzpicture}
+                    \fill[color=FrameBorderTop] (0, 0) rectangle(\paperwidth, \progressbar@height);
+                \end{tikzpicture}
+            \end{beamercolorbox}
+        \fi
     \fi
-    \ifx\beamer@theme@progressbar\beamer@theme@static
-        \fill[color=FrameBorderTop] (0, 0) rectangle(\paperwidth, 0.1);
-    \fi
-  \end{tikzpicture}
-  \end{beamercolorbox}
 }
 
 \ifx\beamer@theme@mode\beamer@theme@simple
@@ -310,8 +322,8 @@
 \define@key{beamerframe}{noframetitle}[true]{%
     \booltrue{uca@noframetitle}
     \begingroup
-        \setbeamertemplate{frametitle}{}
         \setbeamertemplate{footline}{}
+        \setbeamertemplate{frametitle}{}
         \ifx\beamer@theme@footer\beamer@theme@false
             \beamer@frametopskip=0pt plus 0.1fill\relax
         \else
