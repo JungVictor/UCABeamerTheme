@@ -47,10 +47,12 @@ def cleanup(base_dir, texfile):
 if __name__ == "__main__":
 
     texfile = None
+    args = ' '.join(sys.argv[1:-1])
 
     # First argument is the name of the file
     if len(sys.argv) > 1:
-        texfile = sys.argv[1]
+        texfile = sys.argv[-1]
+        print(texfile)
     # Else ask the user
     else:
         texfile = input("Please select a .tex file : ")
@@ -65,8 +67,8 @@ if __name__ == "__main__":
 
     try:
         # Call PDFLaTeX to generate the .pdf
-        subprocess.call('pdflatex.exe -draftmode -interaction=nonstopmode '+texfile, shell=True)
-        subprocess.call('pdflatex.exe -synctex=1 -interaction=nonstopmode '+texfile, shell=True)
+        subprocess.call('pdflatex.exe -draftmode ' + args + ' -interaction=nonstopmode ' + texfile, shell=True)
+        subprocess.call('pdflatex.exe ' + args + ' -interaction=nonstopmode ' + texfile, shell=True)
     except:
         print("Error while generating the files !")
 

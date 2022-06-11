@@ -1,16 +1,33 @@
 % Color theme
-\definecolor{ThemeBlack}{RGB}{0,0,0}
-\definecolor{ThemeWhite}{RGB}{255,255,255}
 \usecolortheme[named=black]{structure}
+
+% Dark mode
+\def\beamer@theme@darkmode{dark}
+\def\darkmode{
+    % Background color of the frame
+    \definecolor{GeneralBackgroundColor}{RGB}{52,61,70}
+    % Color of the text
+    \definecolor{GeneralTextColor}{RGB}{255,255,255}
+}
+
+% Light mode
+\def\beamer@theme@lightmode{light}
+\def\lightmode{
+    % Background color of the frame
+    \definecolor{GeneralBackgroundColor}{RGB}{255,255,255}
+    % Color of the text
+    \definecolor{GeneralTextColor}{RGB}{0,0,0}
+}
+
 
 % Default color setup
 \def\defaultcolorsetup{
-    \colorlet{DarkGray}{ThemeWhite!35!ThemeBlack}
-    \colorlet{LightGray}{ThemeWhite!80!ThemeBlack}
+    \colorlet{DarkGray}{GeneralBackgroundColor!35!GeneralTextColor}
+    \colorlet{LightGray}{GeneralBackgroundColor!80!GeneralTextColor}
     
-    \setbeamercolor{normal text}{fg=ThemeBlack}
-    \setbeamercolor{itemize item}{fg=ThemeBlack}
-    \setbeamercolor{enumerate item}{fg=ThemeBlack}
+    \setbeamercolor{normal text}{fg=GeneralTextColor}
+    \setbeamercolor{itemize item}{fg=GeneralTextColor}
+    \setbeamercolor{enumerate item}{fg=GeneralTextColor}
 
     % THEME RELATED
     \colorlet{TitleFrameLeft}{MainDarkColor}
@@ -25,15 +42,17 @@
     \colorlet{Important}{MainColor}
     \colorlet{SubImportant}{MainLightColor}
     \colorlet{FrameSubtitle}{MainInvisibleColor}
-    \colorlet{FrameTitle}{ThemeWhite}
-    \colorlet{CustomBlockBackground}{GeneralBackgroundColor!95!ThemeBlack}
+    \colorlet{FrameTitle}{GeneralBackgroundColor}
+    \colorlet{CustomBlockBackground}{GeneralBackgroundColor!95!GeneralTextColor}
     \colorlet{InlineCodeBackground}{LightGray}
     
     
     % ------------------
     \setbeamercolor{title}{fg=VeryImportant,parent=structure}
+
     \setbeamercolor{toc title}{fg=Important,parent=structure}
     \setbeamercolor{toc subtitle}{fg=SubImportant,parent=structure}
+
     \setbeamercolor{standout}{bg=MainDarkColor, fg=MainInvisibleColor}
     \setbeamercolor{background canvas}{bg=GeneralBackgroundColor}
     \setbeamercolor{frametitle}{bg=GeneralBackgroundColor}
@@ -42,9 +61,6 @@
 % ==================
 % Color Chart
 % ==================
-
-% --- GENERAL
-\definecolor{GeneralBackgroundColor}{RGB}{240,240,240}
 
 
 % --- UCA
@@ -185,19 +201,15 @@
 \def\beamer@theme@darkcolor{dark}
 \def\DefaultDarkColorTheme{
 
-    \definecolor{ThemeWhite}{RGB}{52,61,70}
-    \definecolor{ThemeBlack}{RGB}{255,255,255}
-
-    \colorlet{GeneralBackgroundColor}{ThemeWhite}
     \definecolor{MainDarkColor}{RGB}{218,216,209}
     \definecolor{MainLightColor}{RGB}{147,152,163}
     \definecolor{MainColor}{RGB}{255, 139, 107}
     \definecolor{SecondaryColor}{RGB}{255, 139, 107}
         
-    \colorlet{MainInvisibleColor}{MainColor!60!ThemeWhite}
+    \colorlet{MainInvisibleColor}{MainColor!60!GeneralBackgroundColor}
         
     \colorlet{ProgressBarActive}{SecondaryColor}
-    \colorlet{ProgressBarBackground}{MainDarkColor!80!ThemeWhite}
+    \colorlet{ProgressBarBackground}{MainDarkColor!80!GeneralBackgroundColor}
     
     \defaultcolorsetup
     
@@ -214,6 +226,9 @@
 \definecolor{CodeString}{RGB}{104, 132, 87}
 \definecolor{CodeKeyword}{RGB}{204, 120, 50}
 \definecolor{CodeComment}{RGB}{50, 177, 204}
+
+% Applying first the style (dark / light)
+\ifx\beamer@theme@style\beamer@theme@darkmode \darkmode \else \lightmode \fi
 
 \DefaultColorTheme
 \ifx\beamer@theme@color\beamer@theme@darkcolor \DefaultDarkColorTheme \fi

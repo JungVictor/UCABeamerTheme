@@ -17,12 +17,13 @@
 % ==================
 % TABLE OF CONTENTS
 % ==================
-\tikzset{section number/.style={
+\tikzset{
+  section number/.style={
     rectangle,  
     fill=SecondaryColor,  
     minimum width=1em,
     minimum height=1.4em,
-    text=ThemeWhite,
+    text=GeneralBackgroundColor,
     inner sep=1.4pt,
   },
   section/.style={
@@ -37,7 +38,7 @@
   subsection number/.style={
     %circle, minimum size=0.4em,
     rectangle, minimum height=0.4em, minimum width=0.4em,
-    fill=ThemeBlack!20!ThemeWhite,
+    fill=GeneralTextColor!20!GeneralBackgroundColor,
     inner sep=0pt,
   },
   subsection/.style={
@@ -46,9 +47,13 @@
     minimum height=1em,
     minimum width=0.8\textwidth,
     text width=0.8\textwidth,
-    text=ThemeBlack!60!ThemeWhite,
+    text=GeneralTextColor!60!GeneralBackgroundColor,
     align=left
-  }
+  },
+  section number shaded/.style={ section number, fill=SecondaryColor!20!GeneralBackgroundColor },
+  section shaded/.style={ section, text=MainColor!20!GeneralBackgroundColor },
+  subsection number shaded/.style={ subsection number, fill=GeneralTextColor!4!GeneralBackgroundColor },
+  subsection shaded/.style={ subsection, text=GeneralTextColor!12!GeneralBackgroundColor }
 }
 
 % Section
@@ -59,10 +64,23 @@
     \tikz[baseline=-0.5ex]
         \node[section]{\usebeamerfont*{toc title} \inserttocsection};\\[-0.8em]
     \hspace*{1.5em}{
-        \color{ThemeBlack!10!ThemeWhite} \rule{0.6\paperwidth}{0.2pt} \\
+        \color{GeneralTextColor!10!GeneralBackgroundColor} \rule{0.6\paperwidth}{0.2pt} \\
         \nointerlineskip
     }
 }
+% Section
+\setbeamertemplate{section in toc shaded}{
+    \hspace*{0.5em}
+    \tikz[baseline=-0.5ex] 
+        \node[section number shaded]{\textbf{\small\inserttocsectionnumber}};
+    \tikz[baseline=-0.5ex]
+        \node[section shaded]{\usebeamerfont*{toc title} \inserttocsection};\\[-0.8em]
+    \hspace*{1.5em}{
+        \color{GeneralTextColor!10!GeneralBackgroundColor} \rule{0.6\paperwidth}{0.2pt} \\
+        \nointerlineskip
+    }
+}
+
 
 % Subsection
 \setbeamertemplate{subsection in toc}{
@@ -70,6 +88,17 @@
   \tikz[baseline=-0.5ex] \node[subsection number]{};
   \hspace*{1.4em}
   \tikz[baseline=-0.5ex] \node[subsection]{
+    \usebeamerfont*{toc subtitle} \inserttocsubsection
+  };
+  \\[-0.1cm]
+}
+
+% Subsection
+\setbeamertemplate{subsection in toc shaded}{
+  \hspace*{1.4em}
+  \tikz[baseline=-0.5ex] \node[subsection number shaded]{};
+  \hspace*{1.4em}
+  \tikz[baseline=-0.5ex] \node[subsection shaded]{
     \usebeamerfont*{toc subtitle} \inserttocsubsection
   };
   \\[-0.1cm]
@@ -278,14 +307,14 @@
 
 % --- Custom blocks definition
 \newcommand{\customblock}[3]{
-        \setbeamercolor*{item}{fg=#1}
-        \begin{adjustbox}{trim=0 2.4ex 0 0, rndcorners=0 4pt}
+        \begin{adjustbox}{trim=0 2.2ex 0 0, rndcorners=0 4pt}
         \begin{tabular}
             % Colors
             {!{\color{#1}{\vrule width 4pt}}>{\columncolor{#2}}m{\dimexpr\textwidth-4ex}}
             \vspace{0.7ex}
+            \setbeamercolor{item}{fg=#1}
             \ifx#3\@empty 
-            \else \usebeamerfont*{block title} {\color{#1!50!ThemeBlack}#3}\vskip 0pt \fi
+            \else \usebeamerfont*{block title} {\color{#1!50!GeneralTextColor}#3}\vskip 0pt \fi
             \usebeamerfont*{block text}
 }
 \newcommand{\customblockend}{\end{tabular}\end{adjustbox}}
