@@ -52,7 +52,6 @@ if __name__ == "__main__":
     # First argument is the name of the file
     if len(sys.argv) > 1:
         texfile = sys.argv[-1]
-        print(texfile)
     # Else ask the user
     else:
         texfile = input("Please select a .tex file : ")

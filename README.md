@@ -30,9 +30,3 @@ If you use LaTeXTools, you can add the script as your default builder. Simply pa
 ## Warning
 This theme is made to be generated using pdflatex.  
 I do not guarantee the result with any other compiler.
-
-## Known issue(s)
-
-When closing a block `\end{block}`, the block crops the bottom of the object if the last element is not a text.
-
-- Fix : Add `\\` before closing the block.
